@@ -1,0 +1,12 @@
+{
+  "name": "language-dauw",
+  "author": "dauw-lang",
+  "version": "0.0.0",
+  "description": "Language support for Dauw in Atom",
+  "keywords": ["language", "grammar", "dauw"],
+  "repository": "https://github.com/dauw-lang/atom-language-dauw",
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  }
+}

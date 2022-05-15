@@ -1,0 +1,99 @@
+# Name and settings for the grammar
+scopeName: 'source.dauw'
+name: 'Dauw'
+fileTypes: ['dauw']
+limitLineLength: false
+
+# Patterns for the grammar
+patterns: [
+  # Comments
+  {include: '#comment'},
+  {include: '#comment_shebang'},
+
+  # Keywords and language constants
+  {include: '#keyword_control'},
+  {include: '#keyword_constant'},
+
+  # Syntax
+  {include: '#syntax_call'},
+  {include: '#syntax_type'},
+
+  # Identifiers
+  {include: '#identifier_ascii'},
+  {include: '#identifier_stropped'},
+
+  # Literals
+  {include: '#literal_real'},
+  {include: '#literal_int'},
+  {include: '#literal_rune'},
+  {include: '#literal_string'},
+  {include: '#literal_regex'},
+  {include: '#literal_lambda'},
+
+  # Operators
+  {include: '#operator'},
+]
+
+# Repository for the grammar
+repository:
+  comment:
+    name: 'comment.line.double-dash.dauw'
+    match: '--(.*)\\r?\\n'
+
+  comment_shebang:
+    name: 'comment.line.number_sign.dauw'
+    match: '^#!(.*)\\r?\\n'
+
+  keyword_control:
+    name: 'keyword.control.dauw'
+    match: '\\b(def|do|else|for|if|in|then|until|while)\\b'
+
+  keyword_constant:
+    name: 'constant.language.dauw'
+    match: '\\b(nothing|false|true)\\b'
+
+  syntax_call:
+    match: '([A-Za-z_][A-Za-z0-9_]*|`((?:[^\\`]|\\.)+)`)\\('
+    captures:
+      1: name: 'entity.name.function.dauw'
+
+  syntax_type:
+    match: ':\\s*([A-Za-z_][A-Za-z0-9_]*)'
+    captures:
+      1: name: 'entity.name.type.dauw'
+
+  identifier_ascii:
+    name: 'variable.dauw'
+    match: '[A-Za-z_][A-Za-z0-9_]*'
+
+  identifier_stropped:
+    name: 'variable.stropped.dauw'
+    match: '`((?:[^\\`]|\\.)+)`'
+
+  literal_int:
+    name: 'constant.numeric.int.dauw'
+    match: '0[Xx][0-9A-Fa-f][0-9A-Fa-f_]*|-?(?:0|[1-9][0-9_]*)'
+
+  literal_real:
+    name: 'constant.numeric.real.dauw'
+    match: '-?(?:0|[1-9][0-9_]*)(?:\\.[0-9][0-9_]*(?:[Ee][+-]?(?:0|[1-9][0-9_]*))?|[Ee][+-]?(?:0|[1-9][0-9_]*))'
+
+  literal_rune:
+    name: 'string.quoted.single.dauw'
+    match: '\'((?:[^\\\']|\\.)*)\''
+
+  literal_string:
+    name: 'string.quoted.double.dauw'
+    match: '"((?:[^\\"]|\\.)*)"'
+
+  literal_regex:
+    name: 'string.regexp.dauw'
+    match: '/((?:[^\\/]|\\.)*)/[A-Za-z]*'
+
+  literal_lambda:
+    name: 'storage.type.function.dauw'
+    match: '[\\\\]'
+
+  operator:
+    name: 'keyword.operator.dauw'
+    match: '(\\?|\\||\\&|\\#|\\$|\\*|//|/|%%|%|\\+|\\-|\\.\\.|==|<>|<=>|<=|<|>=|>|~|=|not|and|or)'
